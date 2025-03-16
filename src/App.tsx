@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import QrGenerator from "./pages/tools/QrGenerator";
+import WorldClock from "./pages/tools/WorldClock";
 import NotFound from "./pages/NotFound";
 
 // Import framer-motion for animations
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/tools/qr-generator" element={<QrGenerator />} />
+            <Route path="/tools/world-clock" element={<WorldClock />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
