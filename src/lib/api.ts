@@ -16,7 +16,7 @@ export const fetchCurrencyRates = async (base: string = 'USD') => {
 // Time zones
 export const fetchTimeZones = async () => {
   try {
-    const response = await fetch('http://worldtimeapi.org/api/timezone');
+    const response = await fetch('https://worldtimeapi.org/api/timezone');
     if (!response.ok) {
       throw new Error('Failed to fetch time zones');
     }
@@ -29,7 +29,7 @@ export const fetchTimeZones = async () => {
 
 export const fetchTimeForZone = async (timezone: string) => {
   try {
-    const response = await fetch(`http://worldtimeapi.org/api/timezone/${timezone}`);
+    const response = await fetch(`https://worldtimeapi.org/api/timezone/${timezone}`);
     if (!response.ok) {
       throw new Error(`Failed to fetch time for ${timezone}`);
     }
@@ -45,3 +45,4 @@ export const getQRCodeUrl = (text: string, size: number = 200) => {
   const encodedText = encodeURIComponent(text);
   return `https://api.qrserver.com/v1/create-qr-code/?data=${encodedText}&size=${size}x${size}`;
 };
+

@@ -10,6 +10,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import QrGenerator from "./pages/tools/QrGenerator";
 import WorldClock from "./pages/tools/WorldClock";
+import PercentageCalculator from "./pages/tools/PercentageCalculator";
 import NotFound from "./pages/NotFound";
 
 // Import framer-motion for animations
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/tools/qr-generator" element={<QrGenerator />} />
             <Route path="/tools/world-clock" element={<WorldClock />} />
+            <Route path="/tools/percentage-calculator" element={<PercentageCalculator />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
