@@ -11,6 +11,8 @@ import Contact from "./pages/Contact";
 import QrGenerator from "./pages/tools/QrGenerator";
 import WorldClock from "./pages/tools/WorldClock";
 import PercentageCalculator from "./pages/tools/PercentageCalculator";
+import WordCounter from "./pages/tools/WordCounter";
+import InterestCalculator from "./pages/tools/InterestCalculator";
 import NotFound from "./pages/NotFound";
 
 // Import framer-motion for animations
@@ -41,6 +43,8 @@ const App = () => (
             <Route path="/tools/qr-generator" element={<QrGenerator />} />
             <Route path="/tools/world-clock" element={<WorldClock />} />
             <Route path="/tools/percentage-calculator" element={<PercentageCalculator />} />
+            <Route path="/tools/word-counter" element={<WordCounter />} />
+            <Route path="/tools/interest-calculator" element={<InterestCalculator />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
