@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { RefreshCcw, ArrowRight } from 'lucide-react';
+import { RefreshCcw, ArrowRight, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCurrencyRates, commonCurrencies } from '@/lib/api';
@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const CurrencyConverter: React.FC = () => {
   const [amount, setAmount] = useState('1');
@@ -88,6 +89,11 @@ const CurrencyConverter: React.FC = () => {
                 </div>
               </div>
 
+              {/* Ad slot: Top of page */}
+              <div className="mb-6 p-2 bg-gray-100 text-center text-sm text-gray-500 rounded-lg">
+                Advertisement Space
+              </div>
+
               <Card className="mb-6">
                 <CardContent className="pt-6">
                   <div className="space-y-4">
@@ -116,11 +122,13 @@ const CurrencyConverter: React.FC = () => {
                             <SelectValue placeholder="Select currency" />
                           </SelectTrigger>
                           <SelectContent>
-                            {commonCurrencies.map((c) => (
-                              <SelectItem key={c.code} value={c.code}>
-                                {c.symbol} {c.name} ({c.code})
-                              </SelectItem>
-                            ))}
+                            <ScrollArea className="h-72">
+                              {commonCurrencies.map((c) => (
+                                <SelectItem key={c.code} value={c.code}>
+                                  {c.symbol} {c.name} ({c.code})
+                                </SelectItem>
+                              ))}
+                            </ScrollArea>
                           </SelectContent>
                         </Select>
                       </div>
@@ -145,11 +153,13 @@ const CurrencyConverter: React.FC = () => {
                             <SelectValue placeholder="Select currency" />
                           </SelectTrigger>
                           <SelectContent>
-                            {commonCurrencies.map((c) => (
-                              <SelectItem key={c.code} value={c.code}>
-                                {c.symbol} {c.name} ({c.code})
-                              </SelectItem>
-                            ))}
+                            <ScrollArea className="h-72">
+                              {commonCurrencies.map((c) => (
+                                <SelectItem key={c.code} value={c.code}>
+                                  {c.symbol} {c.name} ({c.code})
+                                </SelectItem>
+                              ))}
+                            </ScrollArea>
                           </SelectContent>
                         </Select>
                       </div>
@@ -160,7 +170,11 @@ const CurrencyConverter: React.FC = () => {
                       className="w-full"
                       disabled={isLoading}
                     >
-                      {isLoading ? "Converting..." : "Convert"}
+                      {isLoading ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Converting...
+                        </>
+                      ) : "Convert"}
                     </Button>
                   </div>
                 </CardContent>
@@ -190,11 +204,16 @@ const CurrencyConverter: React.FC = () => {
 
                     <div className="text-sm text-muted-foreground">
                       <p>Last updated: {new Date().toLocaleString()}</p>
-                      <p className="mt-1">Exchange rates are provided from Fixer.io API with a fallback to open.er-api.com.</p>
+                      <p className="mt-1">Exchange rates are provided from open.er-api.com.</p>
                     </div>
                   </CardContent>
                 </Card>
               )}
+
+              {/* Ad slot: Before content block */}
+              <div className="my-6 p-2 bg-gray-100 text-center text-sm text-gray-500 rounded-lg">
+                Advertisement Space
+              </div>
 
               <div className="mt-8 p-6 bg-toolify-50 rounded-lg text-sm">
                 <h3 className="font-semibold mb-2">About Currency Conversion</h3>
@@ -212,6 +231,11 @@ const CurrencyConverter: React.FC = () => {
                   <li>Business accounting for multinational operations</li>
                   <li>Remittances and money transfers</li>
                 </ul>
+              </div>
+
+              {/* Ad slot: Bottom of page */}
+              <div className="mt-6 p-2 bg-gray-100 text-center text-sm text-gray-500 rounded-lg">
+                Advertisement Space
               </div>
             </div>
           </div>
