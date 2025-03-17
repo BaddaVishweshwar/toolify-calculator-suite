@@ -8,12 +8,27 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { DollarSign } from 'lucide-react';
 import { toast } from 'sonner';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { commonCurrencies } from '@/lib/api';
 
 const InterestCalculator: React.FC = () => {
   const [principal, setPrincipal] = useState('');
   const [rate, setRate] = useState('');
   const [time, setTime] = useState('');
   const [result, setResult] = useState<number | null>(null);
+  const [currency, setCurrency] = useState('USD');
+  const [compoundFrequency, setCompoundFrequency] = useState('annually');
+
+  const getCurrencySymbol = (code: string) => {
+    const foundCurrency = commonCurrencies.find(c => c.code === code);
+    return foundCurrency ? foundCurrency.symbol : '$';
+  };
 
   const calculateInterest = () => {
     if (!principal || !rate || !time) {
@@ -25,7 +40,41 @@ const InterestCalculator: React.FC = () => {
     const r = parseFloat(rate) / 100;
     const t = parseFloat(time);
 
-    const interest = p * r * t;
+    let interest: number;
+    let totalAmount: number;
+
+    if (compoundFrequency === 'simple') {
+      // Simple interest calculation
+      interest = p * r * t;
+      totalAmount = p + interest;
+    } else {
+      // Compound interest calculation
+      let n = 1; // compounding frequency per year
+      
+      switch (compoundFrequency) {
+        case 'annually':
+          n = 1;
+          break;
+        case 'semi-annually':
+          n = 2;
+          break;
+        case 'quarterly':
+          n = 4;
+          break;
+        case 'monthly':
+          n = 12;
+          break;
+        case 'daily':
+          n = 365;
+          break;
+        default:
+          n = 1;
+      }
+      
+      totalAmount = p * Math.pow(1 + (r / n), n * t);
+      interest = totalAmount - p;
+    }
+
     setResult(interest);
     toast.success('Interest calculated successfully!');
   };
@@ -35,6 +84,7 @@ const InterestCalculator: React.FC = () => {
       <Helmet>
         <title>Interest Calculator | Toolify</title>
         <meta name="description" content="Calculate simple and compound interest with detailed breakdowns." />
+        <meta name="keywords" content="interest calculator, simple interest, compound interest, financial calculator, loan interest, investment interest, interest rate calculator, interest computation, savings interest, deposit interest, annual interest, money growth calculator" />
       </Helmet>
 
       <Navbar />
@@ -58,6 +108,45 @@ const InterestCalculator: React.FC = () => {
               <Card>
                 <CardContent className="pt-6">
                   <div className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="currency">Currency</Label>
+                        <Select
+                          value={currency}
+                          onValueChange={setCurrency}
+                        >
+                          <SelectTrigger id="currency">
+                            <SelectValue placeholder="Select Currency" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {commonCurrencies.map((c) => (
+                              <SelectItem key={c.code} value={c.code}>
+                                {c.symbol} {c.name} ({c.code})
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="compoundFrequency">Interest Type</Label>
+                        <Select
+                          value={compoundFrequency}
+                          onValueChange={setCompoundFrequency}
+                        >
+                          <SelectTrigger id="compoundFrequency">
+                            <SelectValue placeholder="Compounding Frequency" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="simple">Simple Interest</SelectItem>
+                            <SelectItem value="annually">Annually</SelectItem>
+                            <SelectItem value="semi-annually">Semi-Annually</SelectItem>
+                            <SelectItem value="quarterly">Quarterly</SelectItem>
+                            <SelectItem value="monthly">Monthly</SelectItem>
+                            <SelectItem value="daily">Daily</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
                     <div>
                       <Label htmlFor="principal">Principal Amount</Label>
                       <Input
@@ -94,15 +183,35 @@ const InterestCalculator: React.FC = () => {
                       <div className="mt-4 p-4 bg-toolify-50 rounded-lg">
                         <h3 className="font-semibold mb-2">Results:</h3>
                         <div className="space-y-2">
-                          <p>Principal Amount: ${parseFloat(principal).toFixed(2)}</p>
-                          <p>Interest Amount: ${result.toFixed(2)}</p>
-                          <p>Total Amount: ${(parseFloat(principal) + result).toFixed(2)}</p>
+                          <p>Principal Amount: {getCurrencySymbol(currency)}{parseFloat(principal).toFixed(2)}</p>
+                          <p>Interest Amount: {getCurrencySymbol(currency)}{result.toFixed(2)}</p>
+                          <p>Total Amount: {getCurrencySymbol(currency)}{(parseFloat(principal) + result).toFixed(2)}</p>
+                          {compoundFrequency !== 'simple' && (
+                            <p className="text-sm text-muted-foreground">Compounded {compoundFrequency}</p>
+                          )}
                         </div>
                       </div>
                     )}
                   </div>
                 </CardContent>
               </Card>
+
+              <div className="mt-8 p-6 bg-toolify-50 rounded-lg text-sm">
+                <h3 className="font-semibold mb-2">About Interest Calculation</h3>
+                <p className="mb-3">Interest is the cost of borrowing money or the return earned on investments. There are two main types:</p>
+                
+                <div className="space-y-3">
+                  <div>
+                    <h4 className="font-medium">Simple Interest</h4>
+                    <p>Simple interest is calculated only on the initial principal. Formula: P × r × t</p>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-medium">Compound Interest</h4>
+                    <p>Compound interest is calculated on the initial principal and the accumulated interest. Formula: P(1 + r/n)^(nt)</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
