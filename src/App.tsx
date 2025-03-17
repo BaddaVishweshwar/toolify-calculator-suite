@@ -13,6 +13,14 @@ import WorldClock from "./pages/tools/WorldClock";
 import PercentageCalculator from "./pages/tools/PercentageCalculator";
 import WordCounter from "./pages/tools/WordCounter";
 import InterestCalculator from "./pages/tools/InterestCalculator";
+import EmiCalculator from "./pages/tools/EmiCalculator";
+import GstCalculator from "./pages/tools/GstCalculator";
+import AgeCalculator from "./pages/tools/AgeCalculator";
+import DateDifference from "./pages/tools/DateDifference";
+import ProfitLossCalculator from "./pages/tools/ProfitLossCalculator";
+import AreaCalculator from "./pages/tools/AreaCalculator";
+import UnitConverter from "./pages/tools/UnitConverter";
+import CurrencyConverter from "./pages/tools/CurrencyConverter";
 import NotFound from "./pages/NotFound";
 
 // Import framer-motion for animations
@@ -45,6 +53,14 @@ const App = () => (
             <Route path="/tools/percentage-calculator" element={<PercentageCalculator />} />
             <Route path="/tools/word-counter" element={<WordCounter />} />
             <Route path="/tools/interest-calculator" element={<InterestCalculator />} />
+            <Route path="/tools/emi-calculator" element={<EmiCalculator />} />
+            <Route path="/tools/gst-calculator" element={<GstCalculator />} />
+            <Route path="/tools/age-calculator" element={<AgeCalculator />} />
+            <Route path="/tools/date-difference" element={<DateDifference />} />
+            <Route path="/tools/profit-loss-calculator" element={<ProfitLossCalculator />} />
+            <Route path="/tools/area-calculator" element={<AreaCalculator />} />
+            <Route path="/tools/unit-converter" element={<UnitConverter />} />
+            <Route path="/tools/currency-converter" element={<CurrencyConverter />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
