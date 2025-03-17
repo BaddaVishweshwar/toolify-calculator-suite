@@ -66,7 +66,7 @@ Calendar.displayName = "Calendar";
 
 // Custom caption component with month/year dropdowns
 function CustomCaption(props: CaptionProps) {
-  const { displayMonth, currYear } = props;
+  const { displayMonth } = props;
   
   const months = [
     "January", "February", "March", "April", "May", "June", 
@@ -85,13 +85,13 @@ function CustomCaption(props: CaptionProps) {
     const newMonthIndex = months.findIndex(m => m === newMonth);
     const newDate = new Date(displayMonth);
     newDate.setMonth(newMonthIndex);
-    props.onMonthChange(newDate);
+    props.goToMonth(newDate);
   };
   
   const handleYearChange = (newYear: string) => {
     const newDate = new Date(displayMonth);
     newDate.setFullYear(parseInt(newYear));
-    props.onMonthChange(newDate);
+    props.goToMonth(newDate);
   };
   
   return (
