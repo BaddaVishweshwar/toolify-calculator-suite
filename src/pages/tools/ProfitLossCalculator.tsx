@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Navbar from '@/components/layout/Navbar';
@@ -6,8 +5,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { BarChart3, TrendingUp, TrendingDown } from 'lucide-react';
+import { DollarSign, TrendingUp, TrendingDown } from 'lucide-react';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
 import {
   Select,
   SelectContent,
@@ -110,7 +110,7 @@ const ProfitLossCalculator: React.FC = () => {
             <div className="max-w-4xl mx-auto">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-toolify-100 text-toolify-700 flex items-center justify-center">
-                  <BarChart3 size={24} />
+                  <DollarSign size={24} />
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold">Profit/Loss Calculator</h1>
