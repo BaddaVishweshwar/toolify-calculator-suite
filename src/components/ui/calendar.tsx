@@ -66,7 +66,7 @@ Calendar.displayName = "Calendar";
 
 // Custom caption component with month/year dropdowns
 function CustomCaption(props: CaptionProps) {
-  const { displayMonth } = props;
+  const { displayMonth, id } = props;
   
   const months = [
     "January", "February", "March", "April", "May", "June", 
@@ -83,61 +83,53 @@ function CustomCaption(props: CaptionProps) {
   
   const handleMonthChange = (newMonth: string) => {
     const newMonthIndex = months.findIndex(m => m === newMonth);
+    if (newMonthIndex === -1) return;
+    
+    // Navigate to the selected month
     const newDate = new Date(displayMonth);
     newDate.setMonth(newMonthIndex);
     
-    // Access the proper DayPicker context to navigate to a month
-    props.activeModifiers.outside = [];
-    const dayPicker = document.getElementsByClassName('rdp')[0] as HTMLElement;
-    const customEvent = new CustomEvent('dateSelect', { detail: { date: newDate } });
-    dayPicker.dispatchEvent(customEvent);
-    
-    // Fall back to using the DayPicker's built-in navigation
-    if (props.onPrevious && props.onNext) {
-      // Calculate the number of months to move
-      const currentMonth = displayMonth.getMonth();
-      const diff = newMonthIndex - currentMonth;
+    // Get DayPicker instance and dispatch a custom event to update the view
+    const dayPicker = document.getElementById(id)?.closest('.rdp');
+    if (dayPicker) {
+      const event = new CustomEvent('month-change', { 
+        detail: { date: newDate } 
+      });
+      dayPicker.dispatchEvent(event);
       
-      // Move forward or backward based on the difference
-      if (diff > 0) {
-        for (let i = 0; i < diff; i++) {
-          props.onNext();
+      // Update the displayed month directly in the DOM as a fallback
+      setTimeout(() => {
+        const captionLabel = dayPicker.querySelector('.rdp-caption_label');
+        if (captionLabel) {
+          captionLabel.textContent = `${months[newMonthIndex]} ${year}`;
         }
-      } else if (diff < 0) {
-        for (let i = 0; i < Math.abs(diff); i++) {
-          props.onPrevious();
-        }
-      }
+      }, 10);
     }
   };
   
   const handleYearChange = (newYear: string) => {
-    const newDate = new Date(displayMonth);
     const newYearNumber = parseInt(newYear);
-    const currentYear = displayMonth.getFullYear();
+    if (isNaN(newYearNumber)) return;
+    
+    // Navigate to the selected year
+    const newDate = new Date(displayMonth);
     newDate.setFullYear(newYearNumber);
     
-    // Access the proper DayPicker context to navigate to a month
-    props.activeModifiers.outside = [];
-    const dayPicker = document.getElementsByClassName('rdp')[0] as HTMLElement;
-    const customEvent = new CustomEvent('dateSelect', { detail: { date: newDate } });
-    dayPicker.dispatchEvent(customEvent);
-    
-    // Fall back to using the DayPicker's built-in navigation
-    if (props.onPrevious && props.onNext) {
-      // Calculate the number of years to move
-      const diff = newYearNumber - currentYear;
+    // Get DayPicker instance and dispatch a custom event to update the view
+    const dayPicker = document.getElementById(id)?.closest('.rdp');
+    if (dayPicker) {
+      const event = new CustomEvent('month-change', { 
+        detail: { date: newDate } 
+      });
+      dayPicker.dispatchEvent(event);
       
-      // Move by months (12 months per year)
-      if (diff > 0) {
-        for (let i = 0; i < diff * 12; i++) {
-          props.onNext();
+      // Update the displayed month directly in the DOM as a fallback
+      setTimeout(() => {
+        const captionLabel = dayPicker.querySelector('.rdp-caption_label');
+        if (captionLabel) {
+          captionLabel.textContent = `${months[monthIndex]} ${newYearNumber}`;
         }
-      } else if (diff < 0) {
-        for (let i = 0; i < Math.abs(diff) * 12; i++) {
-          props.onPrevious();
-        }
-      }
+      }, 10);
     }
   };
   
