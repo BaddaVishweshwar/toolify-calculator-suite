@@ -87,9 +87,8 @@ function CustomCaption(props: CaptionProps) {
     newDate.setMonth(newMonthIndex);
     
     // Use the captionProps directly from the DayPicker component
-    const calendarController = props.onMonthNav;
-    if (calendarController) {
-      calendarController(newDate);
+    if (props.onSelect) {
+      props.onSelect(newDate);
     }
   };
   
@@ -98,9 +97,8 @@ function CustomCaption(props: CaptionProps) {
     newDate.setFullYear(parseInt(newYear));
     
     // Use the captionProps directly from the DayPicker component
-    const calendarController = props.onMonthNav;
-    if (calendarController) {
-      calendarController(newDate);
+    if (props.onSelect) {
+      props.onSelect(newDate);
     }
   };
   
