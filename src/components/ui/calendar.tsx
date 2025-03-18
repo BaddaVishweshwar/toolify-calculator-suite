@@ -86,19 +86,58 @@ function CustomCaption(props: CaptionProps) {
     const newDate = new Date(displayMonth);
     newDate.setMonth(newMonthIndex);
     
-    // Use the captionProps directly from the DayPicker component
-    if (props.onSelect) {
-      props.onSelect(newDate);
+    // Access the proper DayPicker context to navigate to a month
+    props.activeModifiers.outside = [];
+    const dayPicker = document.getElementsByClassName('rdp')[0] as HTMLElement;
+    const customEvent = new CustomEvent('dateSelect', { detail: { date: newDate } });
+    dayPicker.dispatchEvent(customEvent);
+    
+    // Fall back to using the DayPicker's built-in navigation
+    if (props.onPrevious && props.onNext) {
+      // Calculate the number of months to move
+      const currentMonth = displayMonth.getMonth();
+      const diff = newMonthIndex - currentMonth;
+      
+      // Move forward or backward based on the difference
+      if (diff > 0) {
+        for (let i = 0; i < diff; i++) {
+          props.onNext();
+        }
+      } else if (diff < 0) {
+        for (let i = 0; i < Math.abs(diff); i++) {
+          props.onPrevious();
+        }
+      }
     }
   };
   
   const handleYearChange = (newYear: string) => {
     const newDate = new Date(displayMonth);
-    newDate.setFullYear(parseInt(newYear));
+    const newYearNumber = parseInt(newYear);
+    const currentYear = displayMonth.getFullYear();
+    newDate.setFullYear(newYearNumber);
     
-    // Use the captionProps directly from the DayPicker component
-    if (props.onSelect) {
-      props.onSelect(newDate);
+    // Access the proper DayPicker context to navigate to a month
+    props.activeModifiers.outside = [];
+    const dayPicker = document.getElementsByClassName('rdp')[0] as HTMLElement;
+    const customEvent = new CustomEvent('dateSelect', { detail: { date: newDate } });
+    dayPicker.dispatchEvent(customEvent);
+    
+    // Fall back to using the DayPicker's built-in navigation
+    if (props.onPrevious && props.onNext) {
+      // Calculate the number of years to move
+      const diff = newYearNumber - currentYear;
+      
+      // Move by months (12 months per year)
+      if (diff > 0) {
+        for (let i = 0; i < diff * 12; i++) {
+          props.onNext();
+        }
+      } else if (diff < 0) {
+        for (let i = 0; i < Math.abs(diff) * 12; i++) {
+          props.onPrevious();
+        }
+      }
     }
   };
   
