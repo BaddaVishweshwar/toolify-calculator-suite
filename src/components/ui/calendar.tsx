@@ -86,9 +86,10 @@ function CustomCaption(props: CaptionProps) {
     const newDate = new Date(displayMonth);
     newDate.setMonth(newMonthIndex);
     
-    // The goToMonth function is provided by react-day-picker through the onChange handler
-    if (props.onChange) {
-      props.onChange(newDate);
+    // Use the captionProps directly from the DayPicker component
+    const calendarController = props.onMonthNav;
+    if (calendarController) {
+      calendarController(newDate);
     }
   };
   
@@ -96,9 +97,10 @@ function CustomCaption(props: CaptionProps) {
     const newDate = new Date(displayMonth);
     newDate.setFullYear(parseInt(newYear));
     
-    // The goToMonth function is provided by react-day-picker through the onChange handler
-    if (props.onChange) {
-      props.onChange(newDate);
+    // Use the captionProps directly from the DayPicker component
+    const calendarController = props.onMonthNav;
+    if (calendarController) {
+      calendarController(newDate);
     }
   };
   
