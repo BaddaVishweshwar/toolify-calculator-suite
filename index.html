@@ -53,7 +53,16 @@
       if (window.location.hostname.indexOf('www.') === 0) {
         window.location.href = window.location.href.replace('www.', '');
       }
+      
+      // Handle trailing slashes for better SEO
+      const path = window.location.pathname;
+      if (path !== '/' && path.endsWith('/')) {
+        window.location.href = path.slice(0, -1) + window.location.search + window.location.hash;
+      }
     </script>
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
   </head>
 
   <body>

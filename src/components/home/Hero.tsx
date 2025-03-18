@@ -14,13 +14,13 @@ const Hero: React.FC = () => {
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-16">
-      <div className="absolute inset-0 bg-gradient-to-br from-toolify-50/80 to-background z-[-1]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-toolify-50/80 to-blue-50 z-[-1]" />
 
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden z-[-2]">
-        <div className="absolute top-[10%] right-[10%] w-64 h-64 rounded-full bg-toolify-200/30 blur-3xl" />
+        <div className="absolute top-[10%] right-[10%] w-64 h-64 rounded-full bg-purple-200/30 blur-3xl" />
         <div className="absolute bottom-[10%] left-[5%] w-72 h-72 rounded-full bg-toolify-100/20 blur-2xl" />
-        <div className="absolute top-[30%] left-[15%] w-96 h-96 rounded-full bg-toolify-300/10 blur-2xl" />
+        <div className="absolute top-[30%] left-[15%] w-96 h-96 rounded-full bg-blue-300/10 blur-2xl" />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -33,10 +33,12 @@ const Hero: React.FC = () => {
             <span className="inline-block text-sm font-medium px-3 py-1 rounded-full bg-toolify-100 text-toolify-800 mb-4">
               Smart tools for everyday calculations
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-              Every Tool You Need, <br />
-              <span className="text-toolify-600">All in One Place</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-gray-900">
+              Toolify: Your Ultimate Tool Collection
             </h1>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 tracking-tight text-toolify-600">
+              Every Tool You Need, All in One Place
+            </h2>
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
               Toolify offers a collection of powerful, easy-to-use calculators and 
               utilities to simplify your daily tasks. No installations. No complications.

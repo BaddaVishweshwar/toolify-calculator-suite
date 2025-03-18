@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -127,4 +127,32 @@ input, textarea, select {
   .tool-grid {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
+}
+
+/* Custom gradient backgrounds */
+.gradient-purple-blue {
+  background: linear-gradient(135deg, #bbd8ff 0%, #8ac1ff 100%);
+}
+
+.gradient-blue-teal {
+  background: linear-gradient(90deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%);
+}
+
+.gradient-warm {
+  background: linear-gradient(90deg, hsla(29, 92%, 70%, 1) 0%, hsla(0, 87%, 73%, 1) 100%);
+}
+
+/* Card hover effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Custom font styles */
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
 }

@@ -21,13 +21,13 @@ const ToolsGrid: React.FC = () => {
   };
 
   return (
-    <section id="tools" className="py-20">
+    <section id="tools" className="py-20 bg-gradient-to-br from-white via-blue-50 to-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
           <span className="inline-block text-sm font-medium px-3 py-1 rounded-full bg-toolify-100 text-toolify-800 mb-3">
             Powerful & Intuitive
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
             Explore Our Tools
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
