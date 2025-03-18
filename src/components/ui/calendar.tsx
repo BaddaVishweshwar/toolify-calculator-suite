@@ -85,13 +85,21 @@ function CustomCaption(props: CaptionProps) {
     const newMonthIndex = months.findIndex(m => m === newMonth);
     const newDate = new Date(displayMonth);
     newDate.setMonth(newMonthIndex);
-    props.goToMonth(newDate);
+    
+    // The goToMonth function is provided by react-day-picker through the onChange handler
+    if (props.onChange) {
+      props.onChange(newDate);
+    }
   };
   
   const handleYearChange = (newYear: string) => {
     const newDate = new Date(displayMonth);
     newDate.setFullYear(parseInt(newYear));
-    props.goToMonth(newDate);
+    
+    // The goToMonth function is provided by react-day-picker through the onChange handler
+    if (props.onChange) {
+      props.onChange(newDate);
+    }
   };
   
   return (

@@ -11,18 +11,74 @@ const Index: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Toolify - Smart Tools for Everyday Calculations</title>
-        <meta name="description" content="Toolify offers a collection of powerful, easy-to-use calculators and utilities to simplify your daily tasks." />
+        <title>Toolify - Ultimate Collection of Free Online Calculators & Tools | Financial, Date, Conversion Tools</title>
+        <meta name="description" content="Toolify offers a comprehensive collection of free online calculators and tools for finance, date calculations, unit conversions, and more. Save time with our easy-to-use tools for EMI, GST, interest, age, date difference, profit/loss calculations, currency conversion, and measurement conversions." />
+        <meta name="keywords" content="free online calculators, financial calculators, date calculators, conversion tools, EMI calculator, GST calculator, interest calculator, age calculator, date difference, profit loss calculator, currency converter, unit converter, area calculator, word counter, QR generator, world clock, tax calculator, percentage calculator, measurement tools, free utilities, online tools, finance tools, calculation tools, web tools, no-signup tools, financial planning, business tools" />
+        <link rel="canonical" href="https://toolify.app/" />
+        <meta property="og:title" content="Toolify - Ultimate Collection of Free Online Calculators & Tools" />
+        <meta property="og:description" content="Free online calculators for finance, dates, conversions and more. No signup required." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://toolify.app/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Toolify - Ultimate Collection of Free Online Calculators & Tools" />
+        <meta name="twitter:description" content="Free online calculators for finance, dates, conversions and more. No signup required." />
       </Helmet>
       
       <Navbar />
       
       <main className="min-h-screen">
         <Hero />
+        
+        {/* Ad placement before tools section */}
+        <div className="container mx-auto px-4 py-6 text-center">
+          <div className="mx-auto bg-gray-50 p-2 rounded-md flex justify-center items-center h-[90px] max-w-[728px]">
+            <ins className="adsbygoogle"
+              style={{ display: 'inline-block', width: '728px', height: '90px' }}
+              data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+              data-ad-slot="horizontal-ad-slot"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+        </div>
+        
+        <div className="container mx-auto px-4 md:px-6 my-8">
+          <h1 className="text-4xl font-bold text-center mb-8">Free Online Calculators & Utility Tools</h1>
+          <p className="text-lg text-center text-muted-foreground max-w-3xl mx-auto mb-12">
+            Discover our comprehensive collection of free online calculators and tools designed to simplify complex calculations 
+            for finance, dates, measurements, conversions, and everyday tasks. No signup required.
+          </p>
+        </div>
+        
         <ToolsGrid />
+        
+        {/* Ad placement after tools section */}
+        <div className="container mx-auto px-4 py-6 text-center">
+          <div className="mx-auto bg-gray-50 p-2 rounded-md flex justify-center items-center h-[250px] max-w-[300px]">
+            <ins className="adsbygoogle"
+              style={{ display: 'inline-block', width: '300px', height: '250px' }}
+              data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+              data-ad-slot="rectangle-ad-slot"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+        </div>
         
         <section className="py-20 bg-gradient-to-b from-white to-toolify-50">
           <div className="container mx-auto px-4 md:px-6">
+            <h2 className="text-3xl font-bold text-center mb-10">Why Choose Toolify?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <div className="bg-white p-6 rounded-xl shadow-subtle">
+                <h3 className="text-xl font-semibold mb-3">Free & Easy to Use</h3>
+                <p>All our tools are completely free with no signup required. Just visit and start using instantly.</p>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow-subtle">
+                <h3 className="text-xl font-semibold mb-3">Accurate Results</h3>
+                <p>Our calculators are designed to provide precise results for all your financial and conversion needs.</p>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow-subtle">
+                <h3 className="text-xl font-semibold mb-3">Time-Saving</h3>
+                <p>Save valuable time with our optimized tools that deliver quick results for your everyday calculations.</p>
+              </div>
+            </div>
+            
             <div className="bg-white rounded-2xl shadow-subtle p-8 md:p-12 max-w-5xl mx-auto">
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="flex-1">
@@ -119,6 +175,13 @@ const Index: React.FC = () => {
                 <a href="/tools/qr-generator" className="text-muted-foreground hover:text-toolify-600">QR Generator</a>
                 <a href="/tools/currency-converter" className="text-muted-foreground hover:text-toolify-600">Currency Converter</a>
                 <a href="/tools/percentage-calculator" className="text-muted-foreground hover:text-toolify-600">Percentage Calculator</a>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <h3 className="font-semibold mb-2">Financial Tools</h3>
+                <a href="/tools/emi-calculator" className="text-muted-foreground hover:text-toolify-600">EMI Calculator</a>
+                <a href="/tools/gst-calculator" className="text-muted-foreground hover:text-toolify-600">GST Calculator</a>
+                <a href="/tools/interest-calculator" className="text-muted-foreground hover:text-toolify-600">Interest Calculator</a>
               </div>
               
               <div className="flex flex-col gap-2">
