@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Navbar from '@/components/layout/Navbar';
@@ -7,25 +6,28 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { Mail, MapPin, Phone } from 'lucide-react';
-
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
-    message: '',
+    message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const {
+      name,
+      value
+    } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
       toast.success('Thank you for your message! We\'ll be in touch soon.');
@@ -33,14 +35,12 @@ const Contact: React.FC = () => {
         name: '',
         email: '',
         subject: '',
-        message: '',
+        message: ''
       });
       setIsSubmitting(false);
     }, 1500);
   };
-
-  return (
-    <>
+  return <>
       <Helmet>
         <title>Contact Toolify - Get in Touch With Us</title>
         <meta name="description" content="Have questions or feedback? Contact the Toolify team. We'd love to hear from you." />
@@ -76,9 +76,7 @@ const Contact: React.FC = () => {
                 <p className="text-muted-foreground mb-4">
                   For general inquiries and support
                 </p>
-                <a href="mailto:hello@toolify.com" className="text-toolify-600 font-medium hover:underline">
-                  hello@toolify.com
-                </a>
+                <a href="mailto:hello@toolify.com" className="text-toolify-600 font-medium hover:underline">buywithjustbuy@gmail.com</a>
               </div>
               
               <div className="bg-white rounded-2xl p-8 shadow-subtle border border-gray-100 flex flex-col items-center text-center">
@@ -90,8 +88,7 @@ const Contact: React.FC = () => {
                   Monday to Friday, 9am to 5pm
                 </p>
                 <a href="tel:+1234567890" className="text-toolify-600 font-medium hover:underline">
-                  +1 (234) 567-890
-                </a>
+              </a>
               </div>
               
               <div className="bg-white rounded-2xl p-8 shadow-subtle border border-gray-100 flex flex-col items-center text-center">
@@ -103,8 +100,7 @@ const Contact: React.FC = () => {
                   Our virtual office is always open
                 </p>
                 <a href="#" className="text-toolify-600 font-medium hover:underline">
-                  Online Workspace
-                </a>
+              </a>
               </div>
             </div>
             
@@ -118,31 +114,14 @@ const Contact: React.FC = () => {
                       <label htmlFor="name" className="text-sm font-medium">
                         Your Name
                       </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        placeholder="John Doe"
-                        className="w-full rounded-lg border-gray-200 focus:border-toolify-500"
-                      />
+                      <Input id="name" name="name" value={formData.name} onChange={handleInputChange} required placeholder="John Doe" className="w-full rounded-lg border-gray-200 focus:border-toolify-500" />
                     </div>
                     
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-medium">
                         Your Email
                       </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        placeholder="john@example.com"
-                        className="w-full rounded-lg border-gray-200 focus:border-toolify-500"
-                      />
+                      <Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} required placeholder="john@example.com" className="w-full rounded-lg border-gray-200 focus:border-toolify-500" />
                     </div>
                   </div>
                   
@@ -150,38 +129,17 @@ const Contact: React.FC = () => {
                     <label htmlFor="subject" className="text-sm font-medium">
                       Subject
                     </label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="How can we help you?"
-                      className="w-full rounded-lg border-gray-200 focus:border-toolify-500"
-                    />
+                    <Input id="subject" name="subject" value={formData.subject} onChange={handleInputChange} required placeholder="How can we help you?" className="w-full rounded-lg border-gray-200 focus:border-toolify-500" />
                   </div>
                   
                   <div className="space-y-2">
                     <label htmlFor="message" className="text-sm font-medium">
                       Message
                     </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Your message here..."
-                      rows={6}
-                      className="w-full rounded-lg border-gray-200 focus:border-toolify-500"
-                    />
+                    <Textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required placeholder="Your message here..." rows={6} className="w-full rounded-lg border-gray-200 focus:border-toolify-500" />
                   </div>
                   
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="bg-toolify-600 hover:bg-toolify-700 w-full py-6 rounded-lg"
-                  >
+                  <Button type="submit" disabled={isSubmitting} className="bg-toolify-600 hover:bg-toolify-700 w-full py-6 rounded-lg">
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
@@ -199,11 +157,7 @@ const Contact: React.FC = () => {
                   Stay updated with new tools, features, and tips. We never spam, just helpful updates.
                 </p>
                 <div className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
-                  <Input
-                    type="email"
-                    placeholder="Your email address"
-                    className="rounded-full bg-white shadow-sm border-gray-200"
-                  />
+                  <Input type="email" placeholder="Your email address" className="rounded-full bg-white shadow-sm border-gray-200" />
                   <Button className="bg-toolify-600 hover:bg-toolify-700 rounded-full px-6">
                     Subscribe
                   </Button>
@@ -219,27 +173,10 @@ const Contact: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
               <div className="flex items-center">
-                <svg
-                  viewBox="0 0 56 56"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-auto mr-2"
-                >
-                  <path
-                    d="M20 8L38 8L38 16C38 18.2091 36.2091 20 34 20L24 20C21.7909 20 20 18.2091 20 16L20 8Z"
-                    fill="#2980FE"
-                    className="fill-toolify-600"
-                  />
-                  <path
-                    d="M26 20L32 20L32 44C32 46.2091 30.2091 48 28 48V48C25.7909 48 24 46.2091 24 44L24 20L26 20Z"
-                    fill="#2980FE"
-                    className="fill-toolify-600"
-                  />
-                  <path
-                    d="M15 12H43C45.2091 12 47 13.7909 47 16V16C47 18.2091 45.2091 20 43 20H13C10.7909 20 9 18.2091 9 16V16C9 13.7909 10.7909 12 13 12H15Z"
-                    fill="#0B50E2"
-                    className="fill-toolify-700"
-                  />
+                <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-8 w-auto mr-2">
+                  <path d="M20 8L38 8L38 16C38 18.2091 36.2091 20 34 20L24 20C21.7909 20 20 18.2091 20 16L20 8Z" fill="#2980FE" className="fill-toolify-600" />
+                  <path d="M26 20L32 20L32 44C32 46.2091 30.2091 48 28 48V48C25.7909 48 24 46.2091 24 44L24 20L26 20Z" fill="#2980FE" className="fill-toolify-600" />
+                  <path d="M15 12H43C45.2091 12 47 13.7909 47 16V16C47 18.2091 45.2091 20 43 20H13C10.7909 20 9 18.2091 9 16V16C9 13.7909 10.7909 12 13 12H15Z" fill="#0B50E2" className="fill-toolify-700" />
                 </svg>
                 <span className="font-display font-bold text-lg">Toolify</span>
               </div>
@@ -281,8 +218,6 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </footer>
-    </>
-  );
+    </>;
 };
-
 export default Contact;
