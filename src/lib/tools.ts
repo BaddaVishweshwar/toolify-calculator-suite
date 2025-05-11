@@ -14,7 +14,7 @@ import {
   Globe,
   FileText,
   Image,
-  Compress,
+  MinusSquare, // Replacing Compress with MinusSquare as an alternative
 } from 'lucide-react';
 
 export interface Tool {
@@ -40,7 +40,7 @@ export const tools: Tool[] = [
     id: 'image-compressor',
     title: 'Image Compressor',
     description: 'Compress and optimize your images without losing quality.',
-    icon: Compress,
+    icon: MinusSquare, // Using MinusSquare instead of Compress
     path: '/tools/image-compressor',
     category: 'file',
   },

@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import Navbar from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
-import { Image, Upload, Download, RefreshCw } from 'lucide-react';
+import { Image, Upload, Download, RefreshCw, MinusSquare } from 'lucide-react'; // Replace Compress with MinusSquare
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 
