@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import Navbar from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
@@ -11,6 +12,8 @@ const PdfToWord: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isConverting, setIsConverting] = useState(false);
   const [converted, setConverted] = useState(false);
+  const [convertedUrl, setConvertedUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -28,6 +31,35 @@ const PdfToWord: React.FC = () => {
       
       setFile(selectedFile);
       setConverted(false);
+      setConvertedUrl(null);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      const droppedFile = e.dataTransfer.files[0];
+      
+      if (droppedFile.type !== 'application/pdf') {
+        toast.error('Please upload a PDF file');
+        return;
+      }
+      
+      if (droppedFile.size > 15 * 1024 * 1024) { // 15MB limit
+        toast.error('File size exceeds 15MB limit');
+        return;
+      }
+      
+      setFile(droppedFile);
+      setConverted(false);
+      setConvertedUrl(null);
     }
   };
 
@@ -39,8 +71,13 @@ const PdfToWord: React.FC = () => {
     
     setIsConverting(true);
     
-    // Simulate conversion
+    // Simulate conversion process
     setTimeout(() => {
+      // Create a dummy file URL for demo purposes
+      const blob = new Blob(['dummy content'], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const url = URL.createObjectURL(blob);
+      
+      setConvertedUrl(url);
       setIsConverting(false);
       setConverted(true);
       toast.success('File successfully converted to Word format!');
@@ -48,21 +85,51 @@ const PdfToWord: React.FC = () => {
   };
 
   const handleDownload = () => {
+    if (!convertedUrl) {
+      toast.error('Conversion failed. Please try again.');
+      return;
+    }
+    
+    // Create a link and trigger download
+    const link = document.createElement('a');
+    link.href = convertedUrl;
+    link.download = file ? file.name.replace('.pdf', '.docx') : 'converted-document.docx';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
     toast.success('Your Word document has been downloaded');
-    // In a real app, this would trigger a file download
+  };
+
+  const handleReset = () => {
+    setFile(null);
+    setConverted(false);
+    setConvertedUrl(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   return (
     <>
       <Helmet>
-        <title>PDF to Word Converter | Toolify</title>
-        <meta name="description" content="Convert PDF files to editable Word documents online for free. No email required." />
+        <title>PDF to Word Converter Online - Free Tool | Toolify</title>
+        <meta name="description" content="Convert PDF files to editable Word documents online for free. No email or registration required. Keep your original formatting intact with our fast conversion tool." />
+        <meta name="keywords" content="PDF to Word, convert PDF to Word, PDF to DOCX converter, edit PDF files, free PDF converter, online PDF converter, PDF to Word online, PDF to Word free, no registration PDF converter" />
+        <meta property="og:title" content="PDF to Word Converter Online - Free Tool | Toolify" />
+        <meta property="og:description" content="Convert PDF files to editable Word documents online for free. No email or registration required." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://toolify.app/tools/pdf-to-word" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="PDF to Word Converter Online - Free Tool | Toolify" />
+        <meta name="twitter:description" content="Convert PDF files to editable Word documents online for free. No email or registration required." />
+        <link rel="canonical" href="https://toolify.app/tools/pdf-to-word" />
       </Helmet>
       
       <Navbar />
       
       <main className="pt-24 pb-16 animate-fade-in min-h-screen">
-        <section className="py-12 bg-gradient-to-b from-blue-100 to-white">
+        <section className="py-12 bg-gradient-to-b from-blue-50 to-white">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center">
               <motion.div
@@ -70,10 +137,10 @@ const PdfToWord: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <span className="inline-block text-sm font-medium px-3 py-1 rounded-full bg-toolify-100 text-toolify-800 mb-4">
+                <span className="inline-block text-sm font-medium px-3 py-1 rounded-full bg-blue-100 text-blue-800 mb-4">
                   File Converter
                 </span>
-                <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-toolify-700 to-purple-600 bg-clip-text text-transparent">
+                <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
                   PDF to Word Converter
                 </h1>
                 <p className="text-lg text-muted-foreground mb-8">
@@ -87,7 +154,7 @@ const PdfToWord: React.FC = () => {
         <section className="py-12">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto">
-              <Card className="shadow-lg border-toolify-100">
+              <Card className="shadow-md border-gray-200">
                 <CardHeader className="text-center pb-2">
                   <CardTitle className="text-xl font-bold">Convert Your PDF File</CardTitle>
                   <CardDescription>
@@ -99,14 +166,17 @@ const PdfToWord: React.FC = () => {
                   <div className="mb-8">
                     <div
                       className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
-                        file ? 'border-green-400 bg-green-50' : 'border-gray-300 hover:border-toolify-400'
+                        file ? 'border-green-400 bg-green-50' : 'border-gray-300 hover:border-blue-400'
                       }`}
-                      onClick={() => document.getElementById('file-upload')?.click()}
+                      onClick={() => fileInputRef.current?.click()}
+                      onDragOver={handleDragOver}
+                      onDrop={handleDrop}
                     >
                       <input
                         type="file"
                         id="file-upload"
                         className="hidden"
+                        ref={fileInputRef}
                         accept=".pdf"
                         onChange={handleFileChange}
                       />
@@ -120,12 +190,33 @@ const PdfToWord: React.FC = () => {
                             <p className="text-sm text-muted-foreground mt-1">
                               {(file.size / 1024 / 1024).toFixed(2)} MB
                             </p>
-                            <p className="mt-4 text-sm text-green-600">File selected successfully. Click to change</p>
+                            <div className="mt-4 flex gap-2">
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleReset();
+                                }}
+                              >
+                                Remove
+                              </Button>
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  fileInputRef.current?.click();
+                                }}
+                              >
+                                Change
+                              </Button>
+                            </div>
                           </>
                         ) : (
                           <>
-                            <div className="w-16 h-16 mb-4 flex items-center justify-center rounded-full bg-toolify-100">
-                              <Upload className="h-8 w-8 text-toolify-600" />
+                            <div className="w-16 h-16 mb-4 flex items-center justify-center rounded-full bg-blue-100">
+                              <Upload className="h-8 w-8 text-blue-600" />
                             </div>
                             <p className="text-lg font-medium">Click to upload or drag and drop</p>
                             <p className="text-sm text-muted-foreground mt-1">
@@ -140,7 +231,7 @@ const PdfToWord: React.FC = () => {
                   {/* Conversion steps */}
                   <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
                     <div className="flex-1 text-center p-4">
-                      <div className="w-12 h-12 bg-toolify-100 text-toolify-700 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <div className="w-12 h-12 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mx-auto mb-3">
                         <File className="h-6 w-6" />
                       </div>
                       <h3 className="text-sm font-medium">Upload PDF</h3>
@@ -170,11 +261,16 @@ const PdfToWord: React.FC = () => {
                   {/* Action buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Button
-                      className="flex-1 bg-toolify-600 hover:bg-toolify-700 text-white py-6"
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-6"
                       disabled={!file || isConverting}
                       onClick={handleConvert}
                     >
-                      {isConverting ? 'Converting...' : 'Convert to Word'}
+                      {isConverting ? (
+                        <>
+                          <RefreshCw className="mr-2 h-5 w-5 animate-spin" />
+                          Converting...
+                        </>
+                      ) : 'Convert to Word'}
                     </Button>
                     
                     <Button

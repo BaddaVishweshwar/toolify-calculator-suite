@@ -26,17 +26,17 @@ const ToolCard: React.FC<ToolCardProps> = ({
     <Link
       to={path}
       className={cn(
-        'relative overflow-hidden group rounded-2xl p-6 glass-card flex flex-col h-full',
-        'transform transition-all duration-300 hover:translate-y-[-8px] hover:shadow-card-hover',
+        'relative overflow-hidden group rounded-xl p-6 shadow-md hover:shadow-lg',
+        'transform transition-all duration-300 hover:translate-y-[-6px] border border-gray-200',
         className
       )}
     >
       <motion.div
-        whileHover={{ rotate: [0, -5, 5, -5, 0], scale: 1.1 }}
-        transition={{ duration: 0.5 }}
+        whileHover={{ scale: 1.1 }}
+        transition={{ duration: 0.3 }}
         className={cn(
           'w-14 h-14 rounded-xl flex items-center justify-center mb-4',
-          'bg-gradient-to-r from-toolify-100 to-toolify-200 text-toolify-600',
+          'bg-blue-100 text-blue-700',
           'shadow-sm hover:shadow-md transition-shadow',
           iconClassName
         )}
@@ -47,7 +47,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
       <h3 className="text-lg font-semibold mb-2 text-gray-800">{title}</h3>
       <p className="text-muted-foreground text-sm">{description}</p>
       
-      <div className="mt-4 text-toolify-600 text-sm font-medium flex items-center opacity-0 transform translate-x-[-8px] transition-all group-hover:opacity-100 group-hover:translate-x-0">
+      <div className="mt-4 text-blue-600 text-sm font-medium flex items-center opacity-0 transform translate-x-[-8px] transition-all group-hover:opacity-100 group-hover:translate-x-0">
         Use tool
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -62,9 +62,6 @@ const ToolCard: React.FC<ToolCardProps> = ({
           />
         </svg>
       </div>
-      
-      {/* 3D effect overlay */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
     </Link>
   );
 };

@@ -129,39 +129,39 @@ input, textarea, select {
   }
 }
 
-/* Enhanced gradient backgrounds */
+/* Simplified gradient backgrounds */
 .gradient-0 {
-  background: linear-gradient(135deg, #bbd8ff 0%, #8ac1ff 100%);
+  background: linear-gradient(135deg, #e6f2ff 0%, #99ccff 100%);
 }
 
 .gradient-1 {
-  background: linear-gradient(90deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%);
+  background: linear-gradient(90deg, #f0f9fa 0%, #c5dbe6 100%);
 }
 
 .gradient-2 {
-  background: linear-gradient(90deg, hsla(29, 92%, 70%, 1) 0%, hsla(0, 87%, 73%, 1) 100%);
+  background: linear-gradient(90deg, #fff2e6 0%, #ffcab8 100%);
 }
 
 .gradient-3 {
-  background: linear-gradient(90deg, hsla(277, 75%, 84%, 1) 0%, hsla(297, 50%, 51%, 1) 100%);
+  background: linear-gradient(90deg, #f5e6ff 0%, #d6b3e6 100%);
 }
 
 .gradient-4 {
-  background: linear-gradient(90deg, hsla(46, 73%, 75%, 1) 0%, hsla(176, 73%, 88%, 1) 100%);
+  background: linear-gradient(90deg, #fffde6 0%, #e6f9f5 100%);
 }
 
-/* 3D effect styles */
+/* Simplified 3D effect styles */
 .card-3d {
   transform-style: preserve-3d;
   transition: transform 0.3s ease;
 }
 
 .card-3d:hover {
-  transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+  transform: translateY(-8px);
 }
 
 .card-content {
-  transform: translateZ(20px);
+  transform: translateZ(10px);
 }
 
 /* Card hover effects */
@@ -171,7 +171,7 @@ input, textarea, select {
 
 .hover-lift:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 8px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Custom font styles */
@@ -179,19 +179,19 @@ input, textarea, select {
   font-family: 'Poppins', sans-serif;
 }
 
-/* Text gradients */
+/* Simplified text gradients */
 .text-gradient-blue {
-  @apply bg-gradient-to-r from-blue-600 to-toolify-600 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent;
 }
 
 .text-gradient-purple {
-  @apply bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent;
 }
 
 /* Enhanced animations */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-8px); }
 }
 
 .animate-float {
@@ -200,5 +200,5 @@ input, textarea, select {
 
 /* 3D card perspective */
 .perspective-card {
-  perspective: 1000px;
+  perspective: 800px;
 }
