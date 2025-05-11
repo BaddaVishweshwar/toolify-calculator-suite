@@ -21,6 +21,8 @@ import ProfitLossCalculator from "./pages/tools/ProfitLossCalculator";
 import AreaCalculator from "./pages/tools/AreaCalculator";
 import UnitConverter from "./pages/tools/UnitConverter";
 import CurrencyConverter from "./pages/tools/CurrencyConverter";
+import PdfToWord from "./pages/tools/PdfToWord";
+import ImageCompressor from "./pages/tools/ImageCompressor";
 import NotFound from "./pages/NotFound";
 
 // Import framer-motion for animations
@@ -61,6 +63,8 @@ const App = () => (
             <Route path="/tools/area-calculator" element={<AreaCalculator />} />
             <Route path="/tools/unit-converter" element={<UnitConverter />} />
             <Route path="/tools/currency-converter" element={<CurrencyConverter />} />
+            <Route path="/tools/pdf-to-word" element={<PdfToWord />} />
+            <Route path="/tools/image-compressor" element={<ImageCompressor />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

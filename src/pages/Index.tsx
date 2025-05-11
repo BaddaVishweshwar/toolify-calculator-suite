@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import Navbar from '@/components/layout/Navbar';
@@ -27,29 +26,22 @@ const Index: React.FC = () => {
       <Navbar />
       
       <main className="min-h-screen">
-        <Hero />
-        
-        {/* Ad placement before tools section */}
-        <div className="container mx-auto px-4 py-6 text-center">
-          <div className="mx-auto bg-gray-50 p-2 rounded-md flex justify-center items-center h-[90px] max-w-[728px]">
-            <ins className="adsbygoogle"
-              style={{ display: 'inline-block', width: '728px', height: '90px' }}
-              data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-              data-ad-slot="horizontal-ad-slot"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        {/* Move Tools Section to top */}
+        <section id="tools" className="pt-24 pb-16 bg-gradient-to-br from-purple-200 via-blue-100 to-pink-100 animate-fade-in">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-3xl mx-auto text-center mb-8">
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-gray-800">
+                Toolify: Your Ultimate Tool Collection
+              </h1>
+              <p className="text-lg text-muted-foreground mb-6">
+                Discover our comprehensive collection of powerful tools designed to simplify complex calculations and everyday tasks.
+              </p>
+            </div>
+            <ToolsGrid />
           </div>
-        </div>
+        </section>
         
-        <div className="container mx-auto px-4 md:px-6 my-8">
-          <h1 className="text-4xl font-bold text-center mb-4 text-gray-800">Free Online Calculators & Utility Tools</h1>
-          <h2 className="text-2xl font-semibold text-center mb-8 text-toolify-600">Simplify Complex Tasks with Our Collection</h2>
-          <p className="text-lg text-center text-muted-foreground max-w-3xl mx-auto mb-12">
-            Discover our comprehensive collection of free online calculators and tools designed to simplify complex calculations 
-            for finance, dates, measurements, conversions, and everyday tasks. No signup required.
-          </p>
-        </div>
-        
-        <ToolsGrid />
+        <Hero />
         
         {/* Ad placement after tools section */}
         <div className="container mx-auto px-4 py-6 text-center">
@@ -62,7 +54,7 @@ const Index: React.FC = () => {
           </div>
         </div>
         
-        <section className="py-20 bg-gradient-to-b from-purple-50 to-white">
+        <section className="py-20 bg-gradient-to-b from-blue-100 to-white">
           <div className="container mx-auto px-4 md:px-6">
             <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">Why Choose Toolify?</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -80,7 +72,7 @@ const Index: React.FC = () => {
               </div>
             </div>
             
-            <div className="bg-gradient-to-br from-toolify-50 to-blue-50 rounded-2xl shadow-subtle p-8 md:p-12 max-w-5xl mx-auto border border-gray-100">
+            <div className="bg-gradient-to-br from-purple-100 via-toolify-50 to-blue-100 rounded-2xl shadow-subtle p-8 md:p-12 max-w-5xl mx-auto border border-gray-100">
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="flex-1">
                   <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800">Ready to simplify your calculations?</h2>
@@ -129,7 +121,7 @@ const Index: React.FC = () => {
         </section>
       </main>
       
-      <footer className="bg-gradient-to-t from-blue-50 to-white py-12 border-t border-gray-100">
+      <footer className="bg-gradient-to-t from-purple-100 to-white py-12 border-t border-gray-100">
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">

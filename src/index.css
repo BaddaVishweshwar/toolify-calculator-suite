@@ -129,17 +129,39 @@ input, textarea, select {
   }
 }
 
-/* Custom gradient backgrounds */
-.gradient-purple-blue {
+/* Enhanced gradient backgrounds */
+.gradient-0 {
   background: linear-gradient(135deg, #bbd8ff 0%, #8ac1ff 100%);
 }
 
-.gradient-blue-teal {
+.gradient-1 {
   background: linear-gradient(90deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%);
 }
 
-.gradient-warm {
+.gradient-2 {
   background: linear-gradient(90deg, hsla(29, 92%, 70%, 1) 0%, hsla(0, 87%, 73%, 1) 100%);
+}
+
+.gradient-3 {
+  background: linear-gradient(90deg, hsla(277, 75%, 84%, 1) 0%, hsla(297, 50%, 51%, 1) 100%);
+}
+
+.gradient-4 {
+  background: linear-gradient(90deg, hsla(46, 73%, 75%, 1) 0%, hsla(176, 73%, 88%, 1) 100%);
+}
+
+/* 3D effect styles */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.card-3d:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+}
+
+.card-content {
+  transform: translateZ(20px);
 }
 
 /* Card hover effects */
@@ -155,4 +177,28 @@ input, textarea, select {
 /* Custom font styles */
 .font-poppins {
   font-family: 'Poppins', sans-serif;
+}
+
+/* Text gradients */
+.text-gradient-blue {
+  @apply bg-gradient-to-r from-blue-600 to-toolify-600 bg-clip-text text-transparent;
+}
+
+.text-gradient-purple {
+  @apply bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent;
+}
+
+/* Enhanced animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 3D card perspective */
+.perspective-card {
+  perspective: 1000px;
 }

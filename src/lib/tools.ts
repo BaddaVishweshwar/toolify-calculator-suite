@@ -12,6 +12,9 @@ import {
   Ruler,
   RefreshCcw,
   Globe,
+  FileText,
+  Image,
+  Compress,
 } from 'lucide-react';
 
 export interface Tool {
@@ -20,11 +23,27 @@ export interface Tool {
   description: string;
   icon: any;
   path: string;
-  category: 'calculator' | 'converter' | 'generator' | 'time';
+  category: 'calculator' | 'converter' | 'generator' | 'time' | 'file';
   color?: string;
 }
 
 export const tools: Tool[] = [
+  {
+    id: 'pdf-to-word',
+    title: 'PDF to Word Converter',
+    description: 'Convert PDF files to editable Word documents online.',
+    icon: FileText,
+    path: '/tools/pdf-to-word',
+    category: 'file',
+  },
+  {
+    id: 'image-compressor',
+    title: 'Image Compressor',
+    description: 'Compress and optimize your images without losing quality.',
+    icon: Compress,
+    path: '/tools/image-compressor',
+    category: 'file',
+  },
   {
     id: 'qr-generator',
     title: 'QR Code Generator',

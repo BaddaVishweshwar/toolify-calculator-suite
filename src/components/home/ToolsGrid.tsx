@@ -21,40 +21,48 @@ const ToolsGrid: React.FC = () => {
   };
 
   return (
-    <section id="tools" className="py-20 bg-gradient-to-br from-white via-blue-50 to-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-12">
-          <span className="inline-block text-sm font-medium px-3 py-1 rounded-full bg-toolify-100 text-toolify-800 mb-3">
-            Powerful & Intuitive
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
-            Explore Our Tools
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Discover our collection of powerful tools designed to simplify complex calculations and everyday tasks.
-          </p>
-        </div>
+    <>
+      <motion.div 
+        className="tool-grid"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-50px" }}
+      >
+        {tools.map((tool, index) => (
+          <motion.div 
+            key={tool.id} 
+            variants={item}
+            className="transform transition-all hover:scale-105"
+            style={{ 
+              zIndex: tools.length - index,
+              transformStyle: "preserve-3d",
+              perspective: "1000px"
+            }}
+          >
+            <ToolCard
+              icon={tool.icon}
+              title={tool.title}
+              description={tool.description}
+              path={tool.path}
+              className={`gradient-${index % 5}`}
+              iconClassName={`bg-gradient-to-br ${index % 2 === 0 ? 'from-purple-100 to-purple-200 text-purple-600' : 'from-blue-100 to-blue-200 text-blue-600'}`}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
 
-        <motion.div 
-          className="tool-grid"
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
+      <div className="text-center mt-12">
+        <motion.p 
+          className="text-lg text-muted-foreground mb-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
         >
-          {tools.map((tool) => (
-            <motion.div key={tool.id} variants={item}>
-              <ToolCard
-                icon={tool.icon}
-                title={tool.title}
-                description={tool.description}
-                path={tool.path}
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+          Can't find what you need? We're constantly adding new tools!
+        </motion.p>
       </div>
-    </section>
+    </>
   );
 };
 
